@@ -7,9 +7,12 @@ from rest_framework import serializers
 from rest_framework.serializers import Serializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from drf_yasg.utils import swagger_auto_schema # for coreapi
 
 
 # students
+# for coreapi; deosn't need 'GET' because it has no request.body
+@swagger_auto_schema(methods=['POST'], request_body=StudentSerializer()) 
 @api_view(['GET', 'POST'])
 def students(request):
     if request.method == 'GET':
@@ -47,6 +50,8 @@ def students(request):
 
 
 # student detail
+# for coreapi; doesn't need 'GET' because it has no request.body
+@swagger_auto_schema(methods=['PUT', 'DELETE'], request_body=StudentSerializer()) 
 @api_view(['GET', 'PUT', 'DELETE'])
 def student_detail(request, student_id):
     """
@@ -105,9 +110,9 @@ def student_detail(request, student_id):
 
 
 
-
-
 # books
+# for coreapi; doesn't need 'GET' because it has no request.body
+@swagger_auto_schema(methods=['POST'], request_body=BookSerializer()) 
 @api_view(['GET', 'POST'])
 def books(request):
     if request.method == 'GET':
@@ -145,6 +150,8 @@ def books(request):
 
 
 # book detail
+# for coreapi; doesn't need 'GET' because it has no request.body
+@swagger_auto_schema(methods=['PUT', 'DELETE'], request_body=StudentSerializer()) 
 @api_view(['GET', 'PUT', 'DELETE'])
 def book_detail(request, book_id):
     """
@@ -208,8 +215,11 @@ def list_cohort(request):
     if request.method == 'GET':
         # getting values for a field in django model
         cohorts = Student.objects.values_list('cohort', flat=True)
+        data = {cohort:{
+            "count": Student.objects.filter(cohort=cohort).count(),
+            "data": Student.objects.filter(cohort=cohort).values()
+            } for cohort in cohorts}
         print(cohorts)
-        data = {cohort:Student.objects.filter(cohort=cohort).values() for cohort in cohorts}
 
-        context = {"message": "success", "data": data}
-        return Response(context, status=status.HTTP_204_NO_CONTENT)
+        context = {"message": "success", "data": data} 
+        return Response(context, status=status.HTTP_200_OK)

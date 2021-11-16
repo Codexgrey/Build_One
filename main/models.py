@@ -17,6 +17,10 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @property
+    def study_books(self):
+        return self.books.all().values()
 
 
 class Book(models.Model):

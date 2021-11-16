@@ -15,8 +15,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import permissions
+from rest_framework.decorators import permission_classes   # for coreapi
+from drf_yasg.views import get_schema_view # for coreapi
+from drf_yasg import openapi # for coreapi
+
+
+# for coreapi - schema
+schema_view = get_schema_view(
+    openapi.Info(
+        title="BUILD_ONE API",
+        default_version="v1",
+        description="API Documentation",
+        terms_of_service="Please bear in mind that, this product is still in development...",
+        contact=openapi.Contact(email="thecodexgrey@gmail.com"),
+        license=openapi.License(name="MIT License"),
+    ), 
+    public=True,
+    permission_classes=(permissions.AllowAny,)
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls'))
+    path('', include('main.urls')),
+
+    # for coreapi docs
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

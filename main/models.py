@@ -31,3 +31,7 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def student_name(self):
+        return self.student.name

@@ -8,6 +8,17 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
+    student_name = serializers.ReadOnlyField()
+
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = [
+            "id",
+            "title",
+            "student",
+            "student_name",
+            "author",
+            "body",
+            "isbn",
+            "date"
+        ]

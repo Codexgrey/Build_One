@@ -1,5 +1,4 @@
 # from django.shortcuts import render
-# Create your views here.
 from .models import Student, Book
 from .serializers import StudentSerializer, BookSerializer
 from rest_framework import status
@@ -9,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema # for coreapi
 
+
+# Create your views here.
 
 # students
 # for coreapi; deosn't need 'GET' because it has no request.body
@@ -151,7 +152,7 @@ def books(request):
 
 # book detail
 # for coreapi; doesn't need 'GET' because it has no request.body
-@swagger_auto_schema(methods=['PUT', 'DELETE'], request_body=StudentSerializer()) 
+@swagger_auto_schema(methods=['PUT', 'DELETE'], request_body=BookSerializer()) 
 @api_view(['GET', 'PUT', 'DELETE'])
 def book_detail(request, book_id):
     """

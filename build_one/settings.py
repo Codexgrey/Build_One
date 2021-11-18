@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'main',
+    'account',
     'drf_yasg',
     'coreapi'
 ]
@@ -104,6 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Exetnded user model auth
+AUTH_USER_MODEL = 'account.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

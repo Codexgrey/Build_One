@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Exetnded user model auth
+# Extended user model auth
 AUTH_USER_MODEL = 'account.CustomUser'
 
 # Internationalization

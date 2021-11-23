@@ -32,6 +32,7 @@ schema_view = get_schema_view(
         license=openapi.License(name="MIT License"),
     ), 
     public=True,
+    # permission_classes variable must receive a tuple of one. Hence the (,) 
     permission_classes=(permissions.AllowAny,)
 )
 

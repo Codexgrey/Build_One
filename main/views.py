@@ -107,7 +107,7 @@ def student_detail(request, student_id):
     elif request.method == 'DELETE':
         student.delete()
         context = {"message":"success"}
-        return Response(context, status=status.HTTP_204_NO_CONTENT)
+        return Response(context, status=status.HTTP_202_ACCEPTED)
 
 
 
@@ -207,7 +207,7 @@ def book_detail(request, book_id):
     elif request.method == 'DELETE':
         book.delete()
         context = {"message":"success"}
-        return Response(context, status=status.HTTP_204_NO_CONTENT)
+        return Response(context, status=status.HTTP_202_ACCEPTED)
 
 
 
